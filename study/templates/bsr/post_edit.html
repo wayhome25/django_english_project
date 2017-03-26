@@ -1,0 +1,21 @@
+{% extends 'bsr/base.html' %}
+
+{% block heading %}
+<div class="site-heading">
+    <h1>Weekly English</h1>
+    <hr class="small">
+    <span class="subheading">Edit Post</span>
+</div>
+{% endblock heading %}
+
+{% block content %}
+<form method="POST" class="login-form">
+{% csrf_token %}
+<input type="hidden" name="next" value="">
+{{ form.as_p }}
+<input type="submit" class="save btn btn-success" value="수정">
+<a href="{% url 'study:post_list' %}">
+  <button type="button" class="btn btn-danger">취소</button>
+</a>
+</form>
+{% endblock content %}

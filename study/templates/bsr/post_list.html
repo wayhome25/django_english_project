@@ -1,0 +1,33 @@
+{% extends 'bsr/base.html' %}
+
+{% block heading %}
+<div class="site-heading">
+    <h1>Weekly English</h1>
+    <hr class="small">
+    <span class="subheading">몽키와 썬샤인의 영어공부</span>
+</div>
+{% endblock %}
+
+{% block content %}
+{% for post in posts %}
+  <div class="post-preview">
+      <a href="{% url 'study:post_detail' pk=post.pk %}">
+          <h2 class="post-title">
+              {{ post.title }}
+          </h2>
+          <h3 class="post-subtitle">
+              {{ post.text | truncatechars:200  }}
+          </h3>
+      </a>
+      <p class="post-meta">by <a href="#">{{ post.author }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_date | date:"Y-m-d D" }}</p>
+  </div>
+  <hr>
+{% endfor %}
+
+  <!-- Pager -->
+  <ul class="pager">
+      <li class="next">
+          <a href="#">Older Posts &rarr;</a>
+      </li>
+  </ul>
+{% endblock content %}
