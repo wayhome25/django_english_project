@@ -6,6 +6,7 @@
 body {
   font-size: 17px;
   color: #333333;
+  line-height: 2;
 
 }
 p {
@@ -429,4 +430,12 @@ body {
 }
 .copyright{
   margin-top: 10px;
+}
+
+.heading{
+  color: white;
+}
+.heading:hover{
+  text-decoration: none;
+  color: white;
 }

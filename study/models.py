@@ -8,6 +8,10 @@ class Post(models.Model):
     origin = models.CharField(max_length=200,  blank=True, null=True, verbose_name='원본 URL')
     video_url = models.CharField(max_length=100, blank=True, null=True, verbose_name='YouTube 링크')
     video_key = models.CharField(max_length=12, null=True, blank=True)
+    video_time = models.IntegerField(null=True, blank=True)
+    video_url2 = models.CharField(max_length=100, blank=True, null=True, verbose_name='YouTube 링크2')
+    video_key2 = models.CharField(max_length=12, null=True, blank=True)
+    video_time2 = models.IntegerField(null=True, blank=True)
     text = models.TextField(verbose_name='내용')
     created_date = models.DateTimeField(auto_now_add=True)
 
