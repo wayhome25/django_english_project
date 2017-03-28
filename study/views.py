@@ -26,7 +26,7 @@ def post_new(request):
             if len(post.video_url2) == 0 :
                 post.save()
             if len(post.video_url) > 40 :
-                post.video_key1 = post.video_url1[-11:]
+                post.video_key = post.video_url[-11:]
                 post.save()
             if len(post.video_url2) > 40 :
                 post.video_key2 = post.video_url2[-11:]
@@ -76,7 +76,7 @@ def post_edit(request, pk):
                 post.video_key2 = None
                 post.save()
             if len(post.video_url) > 40 :
-                post.video_key1 = post.video_url1[-11:]
+                post.video_key = post.video_url[-11:]
                 post.save()
             if len(post.video_url2) > 40 :
                 post.video_key2 = post.video_url2[-11:]
