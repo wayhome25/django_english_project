@@ -5,9 +5,9 @@
   <a class="heading" href="/">
     <h1>{{post.title}}</h1>
   </a>
-    {% if post.origin %}
+    <!-- {% if post.origin %}
     <h2 class="subheading"><a class="origin" href="{{post.origin}}">원본자료 출처</a></h2>
-    {% endif %}
+    {% endif %} -->
     <span class="meta">by <a href="#">{{post.author}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_date | date:"Y-m-d D" }}</span>
 </div>
 {% endblock %}
@@ -16,18 +16,21 @@
 <p>
 {% if post.video_key %}
 <div id="player">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ post.video_key }}?start={{post.video_time}}" frameborder="0" allowfullscreen></iframe>
+    <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key }}?start={{post.video_time}}" frameborder="0" allowfullscreen></iframe>
 </div>
 {% endif %}
 {% if post.video_key2 %}
 <div id="player">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ post.video_key2 }}?start={{post.video_time2}}" frameborder="0" allowfullscreen></iframe>
+    <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key2 }}?start={{post.video_time2}}" frameborder="0" allowfullscreen></iframe>
 </div>
 {% endif %}
 
 {% autoescape off %}
 {{post.text|linebreaksbr|urlize }}
 {% endautoescape %}
+{% if post.origin %}
+<p><a class="origin" href="{{post.origin}}">원본자료 출처</a></p>
+{% endif %}
 </p>
 {% if post.author == user %}
 <div class="post-set-btn">
