@@ -77,9 +77,11 @@ def post_edit(request, pk):
                 post.save()
             if len(post.video_url) == 28 :
                 post.video_key = post.video_url[-11:]
+                post.video_time = None
                 post.save()
             if len(post.video_url2) == 28 :
                 post.video_key2 = post.video_url2[-11:]
+                post.video_time2 = None
                 post.save()
             if len(post.video_url) > 29 :
                 # post.video_url 저장
