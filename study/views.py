@@ -25,13 +25,13 @@ def post_new(request):
                 post.save()
             if len(post.video_url2) == 0 :
                 post.save()
-            if len(post.video_url) > 40 :
+            if len(post.video_url) == 28 :
                 post.video_key = post.video_url[-11:]
                 post.save()
-            if len(post.video_url2) > 40 :
+            if len(post.video_url2) == 28 :
                 post.video_key2 = post.video_url2[-11:]
                 post.save()
-            if 0 < len(post.video_url) < 40 :
+            if len(post.video_url) > 29 :
                 # post.video_url 저장
                 post.video_key = post.video_url[17:17+11]
                 regx_time =  r't=\d{0,2}m?\d{0,2}s?'
@@ -43,7 +43,7 @@ def post_new(request):
                 else:
                     post.video_time = int(result_time[0])
                 post.save()
-            if 0 < len(post.video_url2) < 40 :
+            if len(post.video_url2) > 29 :
                 # post.video_url2 저장
                 post.video_key2 = post.video_url2[17:17+11]
                 regx_time =  r't=\d{0,2}m?\d{0,2}s?'
@@ -75,13 +75,13 @@ def post_edit(request, pk):
             if len(post.video_url2) == 0 :
                 post.video_key2 = None
                 post.save()
-            if len(post.video_url) > 40 :
+            if len(post.video_url) == 28 :
                 post.video_key = post.video_url[-11:]
                 post.save()
-            if len(post.video_url2) > 40 :
+            if len(post.video_url2) == 28 :
                 post.video_key2 = post.video_url2[-11:]
                 post.save()
-            if 0 < len(post.video_url) < 40 :
+            if len(post.video_url) > 29 :
                 # post.video_url 저장
                 post.video_key = post.video_url[17:17+11]
                 regx_time =  r't=\d{0,2}m?\d{0,2}s?'
@@ -93,7 +93,7 @@ def post_edit(request, pk):
                 else:
                     post.video_time = int(result_time[0])
                 post.save()
-            if 0 < len(post.video_url2) < 40 :
+            if len(post.video_url2) > 29 :
                 # post.video_url2 저장
                 post.video_key2 = post.video_url2[17:17+11]
                 regx_time =  r't=\d{0,2}m?\d{0,2}s?'
