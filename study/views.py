@@ -6,7 +6,7 @@ from .forms import PostForm
 
 
 def post_list(request):
-    posts = Post.objects.all().order_by('-created_date')
+    posts = Post.objects.all()
     return render(request, 'bsr/post_list.html', {'posts':posts})
 
 

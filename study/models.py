@@ -15,8 +15,13 @@ class Post(models.Model):
     text = models.TextField(verbose_name='내용')
     created_date = models.DateTimeField(auto_now_add=True)
 
+
+    class Meta:
+        ordering = ['-created_date']
+
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     post = models.ForeignKey('study.Post')
@@ -24,5 +29,8 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-created_date']
+        
     def __str__(self):
         return self.text

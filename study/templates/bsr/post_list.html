@@ -16,7 +16,7 @@
               {{ post.title }}
           </h2>
           <h3 class="post-subtitle">
-              {{ post.text | truncatechars:200  }}
+              {{ post.text | truncatechars:200 | safe }}
           </h3>
       </a>
       <p class="post-meta">by <a href="#">{{ post.author }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_date | date:"Y-m-d D" }}</p>
