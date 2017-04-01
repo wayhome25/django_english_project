@@ -34,7 +34,7 @@ a:focus {
 }
 a img:hover,
 a img:focus {
-  cursor: zoom-in;
+  cursor: pointer;
 }
 blockquote {
   color: #777777;
@@ -449,4 +449,29 @@ body {
 .heading:hover{
   text-decoration: none;
   color: white;
+}
+.comment{
+  margin-top: 15px;
+  clear: both;
+}
+.comment-save{
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.comment p{
+  font-size: 13px
+}
+.comment-info{
+  color: salmon;
+}
+.comment_edit,
+.comment_remove{
+  width: 13px;
+  height: 13px;
+  opacity: 0.3;
+}
+.comment_edit:hover,
+.comment_remove:hover{
+  opacity: 1;
 }

@@ -1,4 +1,5 @@
 {% extends 'bsr/base.html' %}
+{% load staticfiles %}
 
 {% block heading %}
 <div class="post-heading">
@@ -13,40 +14,62 @@
 {% endblock %}
 
 {% block content %}
-<p>
-{% if post.video_key %}
-<div id="player">
-    <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key }}?start={{post.video_time}}" frameborder="0" allowfullscreen></iframe>
-</div>
-{% endif %}
-{% if post.video_key2 %}
-<div id="player">
-    <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key2 }}?start={{post.video_time2}}" frameborder="0" allowfullscreen></iframe>
-</div>
-{% endif %}
-
-{% autoescape off %}
-{{post.text|linebreaksbr|urlize }}
-{% endautoescape %}
-{% if post.origin %}
-<p><a class="origin" href="{{post.origin}}">원본자료 출처</a></p>
-{% endif %}
-</p>
-{% if post.author == user %}
-<div class="post-set-btn">
-  <a href="{%url 'study:post_edit' pk=post.pk %}">
-    <button type="button" class="btn btn-success">수정</button>
-  </a>
-  <a href="{%url 'study:post_remove' pk=post.pk %}">
-    <button type="button" class="btn btn-danger">삭제</button>
-  </a>
+  <p>
+  {% if post.video_key %}
+  <div id="player">
+      <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key }}?start={{post.video_time}}" frameborder="0" allowfullscreen></iframe>
+  </div>
   {% endif %}
-  <a href="{% url 'study:post_list' %}">
-    <button type="button" class="btn btn-info">뒤로</button>
-  </a>
-</div>
+  {% if post.video_key2 %}
+  <div id="player">
+      <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key2 }}?start={{post.video_time2}}" frameborder="0" allowfullscreen></iframe>
+  </div>
+  {% endif %}
+
+  {% autoescape off %}
+  {{post.text|linebreaksbr|urlize }}
+  {% endautoescape %}
+  {% if post.origin %}
+  <p><a class="origin" href="{{post.origin}}">원본자료 출처</a></p>
+  {% endif %}
+  </p>
 
 
+  {% if post.author == user %}
+  <div class="post-set-btn">
+    <a href="{%url 'study:post_edit' pk=post.pk %}">
+      <button type="button" class="btn btn-success">수정</button>
+    </a>
+    <a href="{%url 'study:post_remove' pk=post.pk %}">
+      <button type="button" class="btn btn-danger">삭제</button>
+    </a>
+    {% endif %}
+    <a href="{% url 'study:post_list' %}">
+      <button type="button" class="btn btn-info">뒤로</button>
+    </a>
+    <hr>
+    {% if user.is_authenticated %}
+    <form class="" action="" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="btn btn-default btn-xs comment-save" type="submit">저장</button>
+    </form>
+    {% endif %}
+    {% for comment in post.comments.all %}
+    <div class="comment">
+        <div class="comment-info">
+            <strong>{{ comment.author }}</strong>
+            <small>{{ comment.created_date | date:'Y-m-d H:i' }}</small>
+            {% if comment.author == user %}
+            <a href="{% url 'study:comment_remove' pk=comment.pk %}"><img class="comment_edit" src="{% static 'bsr/img/edit.png' %}" alt=""></a>
+            <a href="{% url 'study:comment_remove' pk=comment.pk %}"><img  class="comment_remove" src="{% static 'bsr/img/delete.png' %}" alt=""></a>
+            {% endif %}
+        </div>
+        <p>{{ comment.text|linebreaks }}</p>
+    </div>
+    <hr>
+    {% endfor %}
+  </div>
 
 
-{% endblock content %}
+{% endblock %}
