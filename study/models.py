@@ -24,13 +24,13 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('study.Post')
+    post = models.ForeignKey('study.Post', related_name='comments')
     author = models.ForeignKey('auth.User')
-    text = models.TextField()
+    text = models.TextField(verbose_name='')
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_date']
-        
+
     def __str__(self):
         return self.text
