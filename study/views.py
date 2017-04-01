@@ -1,18 +1,27 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 import re
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'bsr/post_list.html', {'posts':posts})
 
-
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'bsr/post_detail.html', {'post':post})
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+        return redirect('study:post_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+        return render(request, 'bsr/post_detail.html', {'post':post, 'form':form})
 
 @login_required
 def post_new(request):
@@ -122,5 +131,19 @@ def post_remove(request, pk):
     if post.author == request.user:
         post.delete()
         return redirect('study:post_list')
+    else:
+        return render(request, 'bsr/warning.html')
+
+# @login_required
+# def comment_edit(request, pk):
+#     pass
+
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if comment.author == request.user:
+        post_pk = comment.post.pk
+        comment.delete()
+        return redirect('study:post_detail', pk=post_pk)
     else:
         return render(request, 'bsr/warning.html')
