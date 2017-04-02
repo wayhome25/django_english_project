@@ -481,3 +481,11 @@ body {
   font-size:1em;
   color:blue;
 }
+.count{
+  font-size: 12px;
+  color: #2b6e4a
+
+}
+.footer:hover{
+  text-decoration: none !important;
+}

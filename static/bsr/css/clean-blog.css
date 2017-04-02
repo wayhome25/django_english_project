@@ -7,6 +7,7 @@ body {
   font-size: 17px;
   color: #333333;
   line-height: 2;
+
 }
 p {
   line-height: 1.5;
@@ -473,4 +474,18 @@ body {
 .comment_edit:hover,
 .comment_remove:hover{
   opacity: 1;
+}
+.comment_save{
+  background:none;
+  border:none;
+  font-size:1em;
+  color:blue;
+}
+.count{
+  font-size: 12px;
+  color: #2b6e4a
+
+}
+.footer:hover{
+  text-decoration: none !important;
 }

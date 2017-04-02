@@ -14,6 +14,7 @@
       <a href="{% url 'study:post_detail' pk=post.pk %}">
           <h2 class="post-title">
               {{ post.title }}
+              <span class="count">[{{ post.comments.count }}]</span>
           </h2>
           <h3 class="post-subtitle">
               {{ post.text | truncatechars:200 | safe }}

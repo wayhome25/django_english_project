@@ -27,7 +27,7 @@
   {% endif %}
 
   {% autoescape off %}
-  {{post.text|linebreaksbr|urlize }}
+  {{post.text|linebreaksbr }}
   {% endautoescape %}
   {% if post.origin %}
   <p><a class="origin" href="{{post.origin}}">원본자료 출처</a></p>
