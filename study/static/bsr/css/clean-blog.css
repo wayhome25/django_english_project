@@ -475,3 +475,9 @@ body {
 .comment_remove:hover{
   opacity: 1;
 }
+.comment_save{
+  background:none;
+  border:none;
+  font-size:1em;
+  color:blue;
+}

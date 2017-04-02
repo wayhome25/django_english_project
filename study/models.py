@@ -14,7 +14,7 @@ class Post(models.Model):
     video_time2 = models.IntegerField(null=True, blank=True)
     text = models.TextField(verbose_name='내용')
     created_date = models.DateTimeField(auto_now_add=True)
-
+    
 
     class Meta:
         ordering = ['-created_date']
