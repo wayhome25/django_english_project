@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 import re
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
@@ -147,3 +148,20 @@ def comment_remove(request, pk):
         return redirect('study:post_detail', pk=post_pk)
     else:
         return render(request, 'bsr/warning.html')
+
+@login_required
+def comment_edit(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post = get_object_or_404(Post, pk=comment.post.id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.created_date = timezone.now()
+            comment.save()
+        return redirect('study:post_detail', pk=post.pk)
+
+    else:
+        form_edit = CommentForm(instance=comment)
+        return render(request, 'bsr/post_detail.html', {'post':post, 'form_edit':form_edit, 'pk':comment.pk})

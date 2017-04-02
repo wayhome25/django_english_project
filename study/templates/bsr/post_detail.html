@@ -52,24 +52,45 @@
     <form class="" action="" method="post">
       {% csrf_token %}
       {{ form }}
-      <button class="btn btn-default btn-xs comment-save" type="submit">저장</button>
+        {% if form_edit %}
+        {% else %}
+        <button class="btn btn-default btn-xs comment-save" type="submit">저장</button>
+        {% endif %}
     </form>
     {% endif %}
     {% for comment in post.comments.all %}
-    <div class="comment">
-        <div class="comment-info">
-            <strong>{{ comment.author }}</strong>
-            <small>{{ comment.created_date | date:'Y-m-d H:i' }}</small>
-            {% if comment.author == user %}
-            <a href="{% url 'study:comment_remove' pk=comment.pk %}"><img class="comment_edit" src="{% static 'bsr/img/edit.png' %}" alt=""></a>
-            <a href="{% url 'study:comment_remove' pk=comment.pk %}"><img  class="comment_remove" src="{% static 'bsr/img/delete.png' %}" alt=""></a>
-            {% endif %}
-        </div>
-        <p>{{ comment.text|linebreaks }}</p>
-    </div>
-    <hr>
+      {% if comment.id == pk %}
+      <div class="comment">
+        <form class="" action="" method="post">
+          {% csrf_token %}
+          <div class="comment-info">
+              <strong>{{ comment.author }}</strong>
+              <small>{{ comment.created_date | date:'Y-m-d H:i' }}</small>
+              <button class="comment_save" type="submit"><img src="{% static 'bsr/img/edit.png' %}" class="comment_edit" alt="comment_edit_save"></button>
+          </div>
+            {{ form_edit }}
+          </form>
+      </div>
+      <hr>
+      {% else %}
+      <div class="comment">
+          <div class="comment-info">
+              <strong>{{ comment.author }}</strong>
+              <small>{{ comment.created_date | date:'Y-m-d H:i' }}</small>
+              {% if comment.author == user %}
+              <a href="{% url 'study:comment_edit' pk=comment.pk %}"><img class="comment_edit" src="{% static 'bsr/img/edit.png' %}" alt=""></a>
+              <a href="{% url 'study:comment_remove' pk=comment.pk %}"><img  class="comment_remove" src="{% static 'bsr/img/delete.png' %}" alt=""></a>
+              {% endif %}
+          </div>
+          {% autoescape off %}
+          <p>{{ comment.text|linebreaks}}</p>
+          {% endautoescape %}
+      </div>
+      <hr>
+      {% endif %}
     {% endfor %}
   </div>
+
 
 
 {% endblock %}
