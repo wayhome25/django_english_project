@@ -3,7 +3,20 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 import re
 from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, SignupForm
+
+
+
+#회원가입
+def signup(request):
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('study:post_list')
+    else:
+        form = SignupForm()
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 def post_list(request):
