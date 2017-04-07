@@ -1,24 +1,27 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView # 오브젝트를 생성하는 뷰 (form 혹은 model과 연결되서 새로운 데이터를 넣을 때 CreateView - generic view를 사용)
-from django.core.urlresolvers import reverse_lazy # generic view에서는 reverse_lazy를 사용한다.
+from django.contrib.auth import login, authenticate
 from django.utils import timezone
 import re
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, CreateUserForm
 
 
+def signup(request):
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username = username, password = raw_password)
+            login(request, user)
+            return redirect('study:post_list')
+    else:
+        form = CreateUserForm()
+    return render(request, 'registration/signup.html', {'form' : form})
 
-#회원가입 CBV (Class Based View 작성)
-class CreateUserView(CreateView):
-    template_name = 'registration/signup.html'
-    form_class =  CreateUserForm
-    success_url = reverse_lazy('create_user_done')
 
-
-class RegisteredView(TemplateView):
-    template_name = 'registration/signup_done.html'
 
 
 def post_list(request):
