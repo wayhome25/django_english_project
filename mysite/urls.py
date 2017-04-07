@@ -8,8 +8,9 @@ from study import views as study_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^accounts/signup', study_views.signup, name='signup'),
     url(r'^', include('study.urls')),
+    url(r'^accounts/signup/$', study_views.CreateUserView.as_view(), name='signup'),
+    url(r'^accounts/signup/done$', study_views.RegisteredView.as_view(), name='create_user_done'),
 ]
 
 if settings.DEBUG: # setting.py의 DEBUG = True인 경우

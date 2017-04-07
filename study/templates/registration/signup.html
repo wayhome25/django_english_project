@@ -11,7 +11,6 @@
 {% block content %}
 <form method="POST" class="signup-form" action="{% url 'signup' %}">
 {% csrf_token %}
-<input type="hidden" name="next" value="">
 {{ form.as_p }}
 <input type="submit" class="save btn btn-success" value="signup">
 <a href="{% url 'study:post_list' %}">
