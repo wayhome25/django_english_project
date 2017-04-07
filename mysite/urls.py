@@ -8,6 +8,7 @@ from study import views as study_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/signup', study_views.signup, name='signup'),
     url(r'^', include('study.urls')),
 ]
 
