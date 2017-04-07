@@ -489,3 +489,8 @@ body {
 .footer:hover{
   text-decoration: none !important;
 }
+
+.signup-guide{
+  display: inline-block;
+  margin-top: 15px
+}
