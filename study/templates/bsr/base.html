@@ -59,6 +59,11 @@
                         <a href="{% url 'login' %}">Login</a>
                         {% endif %}
                     </li>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'study:post_list' %}">welcome, <span class='username'>{{ user.username }}</span></a>
+                        </li>
+                    {% endif %}
                     <!-- <li>
                         <a href="contact.html">Contact</a>
                     </li> -->
