@@ -52,6 +52,7 @@ class CreateUserForm(UserCreationForm):
         label="비밀번호 확인",
         widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '같은 비밀번호를 다시 입력해주세요.'}),
         )
+        
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
