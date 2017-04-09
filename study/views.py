@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
+from django.core.paginator import Paginator
 from django.utils import timezone
 import re
 from .models import Post, Comment
@@ -22,11 +23,19 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form' : form})
 
 
-
-
 def post_list(request):
     posts = Post.objects.all()
-    return render(request, 'bsr/post_list.html', {'posts':posts})
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(posts, 5)
+    try:
+        posts_page = paginator.page(page)
+    except PageNotAnInteger:
+        posts_page = paginator.page(1)
+    except EmptyPage:
+        posts_page = paginator.page(paginator.num_pages)
+
+    return render(request, 'bsr/post_list.html', {'posts':posts_page})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
