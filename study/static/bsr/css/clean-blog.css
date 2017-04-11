@@ -497,3 +497,13 @@ body {
 .username{
   color: PeachPuff ;
 }
+
+.comment-login-required{
+  font-size: 1.3rem;
+}
+
+.login-link{
+  color: #227af0;
+  font-weight: bold;
+
+}

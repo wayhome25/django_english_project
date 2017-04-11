@@ -24,9 +24,10 @@ def signup(request):
 
 
 def post_list(request):
+
+    p = Post.objects.filter(pk = 70)
     posts = Post.objects.all()
     page = request.GET.get('page', 1)
-
     paginator = Paginator(posts, 5)
     try:
         posts_page = paginator.page(page)
@@ -37,10 +38,14 @@ def post_list(request):
 
     return render(request, 'bsr/post_list.html', {'posts':posts_page})
 
+
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
+        if request.user.is_anonymous():
+            return redirect('login')
         form = CommentForm(request.POST)
+
         if form.is_valid():
             comment = form.save(commit=False)
             comment.author = request.user
@@ -162,9 +167,6 @@ def post_remove(request, pk):
     else:
         return render(request, 'bsr/warning.html')
 
-# @login_required
-# def comment_edit(request, pk):
-#     pass
 
 @login_required
 def comment_remove(request, pk):

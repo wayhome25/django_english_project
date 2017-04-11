@@ -48,16 +48,19 @@
       <button type="button" class="btn btn-info">뒤로</button>
     </a>
     <hr>
-    {% if user.is_authenticated %}
+
     <form class="" action="" method="post">
       {% csrf_token %}
       {{ form }}
         {% if form_edit %}
         {% else %}
+          {% if user.is_anonymous %}
+          <span class="comment-login-required"> 댓글 입력을 위해서는 <a href="{%url 'login' %}" class="login-link">로그인</a>이 필요합니다. </span>
+          {% endif %}
         <button class="btn btn-default btn-xs comment-save" type="submit">저장</button>
         {% endif %}
     </form>
-    {% endif %}
+
     {% for comment in post.comments.all %}
       {% if comment.id == pk %}
       <div class="comment">
