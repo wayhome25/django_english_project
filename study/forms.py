@@ -9,7 +9,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title','origin','video_url', 'video_url2', 'text')
+        fields = ('title','origin','video_url', 'video_url2', 'image', 'text')
         widgets = {
             'title' : forms.TextInput(attrs={'class': 'form-control'}),
             'origin' : forms.TextInput(attrs={'class': 'form-control','placeholder': '자료 출처를 입력해주세요.(not required)'}),
@@ -52,7 +52,7 @@ class CreateUserForm(UserCreationForm):
         label="비밀번호 확인",
         widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '같은 비밀번호를 다시 입력해주세요.'}),
         )
-        
+
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')

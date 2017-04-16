@@ -11,7 +11,7 @@
 {% endblock heading %}
 
 {% block content %}
-<form method="POST" class="login-form">
+<form method="POST" class="login-form" enctype="multipart/form-data">
 {% csrf_token %}
 <input type="hidden" name="next" value="">
 {{ form.as_p }}
