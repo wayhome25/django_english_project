@@ -1,13 +1,28 @@
 {% extends 'bsr/base.html' %}
 {% load staticfiles %}
 
+{% load staticfiles %}
+
+
 {% block heading %}
-<div class="post-heading">
-  <a class="heading" href="/">
-    <h1>{{post.title}}</h1>
-  </a>
-    <span class="meta">by <a href="#">{{post.author}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_date | date:"Y-m-d D" }}</span>
-</div>
+{% if post.cover_img %}
+<header class="intro-header" style="background-image: url('{{post.cover_img.url}}')">
+{% else %}
+<header class="intro-header" style="background-image: url('{% static 'bsr/img/home-bg.jpg' %}')">
+{% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <a class="heading" href="/">
+                  <h1>{{post.title}}</h1>
+                </a>
+                  <span class="meta">by <a href="#">{{post.author}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_date | date:"Y-m-d D" }}</span>
+              </div>
+            </div>
+        </div>
+    </div>
+</header>
 {% endblock %}
 
 {% block content %}
@@ -26,15 +41,11 @@
   {% autoescape off %}
   {{post.text|linebreaksbr }}
   {% endautoescape %}
-  {% if post.image %}
-   사진 있다
-     {{post.image.url}}
-    {% if photo.image.width > 600 %}
-    <p><img src="{{ post.image.url }}" width='600'></p>
-    {% else %}
-    <p><img src="{{ post.image.url }}"></p>
-    {% endif %}
-  {% endif %}
+
+{% if post.image %}
+<p class="post-img"><img src="{{ post.image.url }}"></p>
+{% endif %}
+
   {% if post.origin %}
   <p><a class="origin" href="{{post.origin}}">원본자료 출처</a></p>
   {% endif %}

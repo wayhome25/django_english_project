@@ -3,3 +3,5 @@
 myvenv
 __pycache__
 local_settings.py
+uploads/
+db.sqlite3
