@@ -1,5 +1,14 @@
 # study/models.py
 from django.db import models
+from django.conf import settings
+
+def user_path(instance, filename):
+    from random import choice
+    import string
+    arr = [choice(string.ascii_letters) for _ in range(8)]
+    pid = ''.join(arr)
+    extension = filename.split('.')[-1]
+    return '{}/{}.{}'.format(instance.author.username, pid, extension)
 
 
 class Post(models.Model):
@@ -12,9 +21,9 @@ class Post(models.Model):
     video_url2 = models.CharField(max_length=100, blank=True, null=True, verbose_name='YouTube 링크2')
     video_key2 = models.CharField(max_length=12, null=True, blank=True)
     video_time2 = models.IntegerField(null=True, blank=True)
+    image = models.ImageField(upload_to = user_path, blank=True)
     text = models.TextField(verbose_name='내용')
     created_date = models.DateTimeField(auto_now_add=True)
-    
 
     class Meta:
         ordering = ['-created_date']
