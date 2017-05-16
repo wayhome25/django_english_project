@@ -73,7 +73,17 @@ hr.small {
   height : 315px;
 }
 
+.post-img img{
+  width: 100%;
+}
+.post-img{
+  text-align: center;
+}
+
 @media only screen and (min-width: 768px) {
+  .post-img img{
+    width: 100%;
+  }
   .iframe{
     width : 100%;
     height : 500px;
@@ -488,4 +498,22 @@ body {
 }
 .footer:hover{
   text-decoration: none !important;
+}
+
+.signup-guide{
+  display: inline-block;
+  margin-top: 15px
+}
+.username{
+  color: PeachPuff ;
+}
+
+.comment-login-required{
+  font-size: 1.3rem;
+}
+
+.login-link{
+  color: #227af0;
+  font-weight: bold;
+
 }
