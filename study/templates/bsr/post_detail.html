@@ -31,32 +31,6 @@
 	{{post.content|linebreaksbr }}
 	{% endautoescape %}
 
-  {# <p>
-  {% if post.video_key %}
-  <div id="player">
-      <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key }}?start={{post.video_time}}" frameborder="0" allowfullscreen></iframe>
-  </div>
-  {% endif %}
-  {% if post.video_key2 %}
-  <div id="player">
-      <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key2 }}?start={{post.video_time2}}" frameborder="0" allowfullscreen></iframe>
-  </div>
-  {% endif %}
-
-  {% autoescape off %}
-  {{post.text|linebreaksbr }}
-  {% endautoescape %}
-
-{% if post.image %}
-<p class="post-img"><img src="{{ post.image.url }}"></p>
-{% endif %}
-
-  {% if post.origin %}
-  <p><a class="origin" href="{{post.origin}}">원본자료 출처</a></p>
-  {% endif %}
-  </p>#}
-
-
   {% if post.author == user %}
   <div class="post-set-btn">
     <a href="{%url 'study:post_edit' pk=post.pk %}">

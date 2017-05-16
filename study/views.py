@@ -56,66 +56,26 @@ def post_new(request):
 			post.author = request.user
 			post.save()
 			return redirect(post)
-
 	else:
 		form = PostForm()
-		return render(request, 'bsr/post_new.html', {'form': form})
+	return render(request, 'bsr/post_new.html', {'form': form})
 
 
 @login_required
 def post_edit(request, pk):
-	pass
-#     post = get_object_or_404(Post, pk=pk)
-#     if request.method == 'POST':
-#         form = PostForm(request.POST,request.FILES, instance=post)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = request.user
-#             if len(post.video_url) == 0 :
-#                 post.video_key = None
-#                 post.save()
-#             if len(post.video_url2) == 0 :
-#                 post.video_key2 = None
-#                 post.save()
-#             if len(post.video_url) == 28 :
-#                 post.video_key = post.video_url[-11:]
-#                 post.video_time = None
-#                 post.save()
-#             if len(post.video_url2) == 28 :
-#                 post.video_key2 = post.video_url2[-11:]
-#                 post.video_time2 = None
-#                 post.save()
-#             if len(post.video_url) > 29 :
-#                 # post.video_url 저장
-#                 post.video_key = post.video_url[17:17+11]
-#                 regx_time =  r't=\d{0,2}m?\d{0,2}s?'
-#                 result_time = re.search(regx_time, post.video_url)
-#                 result_time = result_time.group(0)
-#                 result_time = re.findall(r'\d+', result_time)
-#                 if len(result_time) > 1:
-#                     post.video_time =  int(result_time[0])*60+int(result_time[1])
-#                 else:
-#                     post.video_time = int(result_time[0])
-#                 post.save()
-#             if len(post.video_url2) > 29 :
-#                 # post.video_url2 저장
-#                 post.video_key2 = post.video_url2[17:17+11]
-#                 regx_time =  r't=\d{0,2}m?\d{0,2}s?'
-#                 result_time = re.search(regx_time, post.video_url2)
-#                 result_time = result_time.group(0)
-#                 result_time = re.findall(r'\d+', result_time)
-#                 if len(result_time) > 1:
-#                     post.video_time2 =  int(result_time[0])*60+int(result_time[1])
-#                 else:
-#                     post.video_time2 = int(result_time[0])
-#                 post.save()
-#             return redirect('study:post_detail', pk=post.pk)
-#     else:
-#         if post.author == request.user:
-#             form = PostForm(instance=post)
-#             return render(request, 'bsr/post_edit.html', {'form':form})
-#         else:
-#             return render(request, 'bsr/warning.html')
+	post = get_object_or_404(Post, pk=pk)
+	if request.method == 'POST':
+		form = PostForm(request.POST, request.FILES, instance=post)
+		if form.is_valid():
+			post = form.save()
+			return redirect(post)
+
+	else:
+		if post.author == request.user:
+			form = PostForm(instance=post)
+			return render(request, 'bsr/post_edit.html', {'form':form})
+		else:
+			return render(request, 'bsr/warning.html')
 
 
 @login_required
