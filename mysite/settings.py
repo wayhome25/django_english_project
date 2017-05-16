@@ -131,3 +131,8 @@ LOGIN_REDIRECT_URL = '/'
 # media url
 MEDIA_URL = '/files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+# Summernote
+SUMMERNOTE_CONFIG = {
+	'disable_upload': False,
+}
