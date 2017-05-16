@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-{% for post in posts %}
+{% for post in object_list %}
   <div class="post-preview">
       <a href="{% url 'study:post_detail' pk=post.pk %}">
           <h2 class="post-title">
@@ -35,33 +35,27 @@
   <hr>
 {% endfor %}
 
-{% if posts.has_other_pages %}
-  <div class="text-center">
-    <ul class="pagination">
-      {% if posts.has_previous %}
-        <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
-      {% else %}
-        <li class="disabled"><span>&laquo;</span></li>
-      {% endif %}
-      {% for i in posts.paginator.page_range %}
-        {% if posts.number == i %}
-          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-        {% else %}
-          <li><a href="?page={{ i }}">{{ i }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% if posts.has_next %}
-        <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
-      {% else %}
-        <li class="disabled"><span>&raquo;</span></li>
-      {% endif %}
-    </ul>
-  </div>
+{% if is_paginated %}
+<div class="text-center">
+	<ul class="pagination">
+	  {% if page_obj.has_previous %}
+	    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+	  {% else %}
+	    <li class="disabled"><span>&laquo;</span></li>
+	  {% endif %}
+	  {% for i in paginator.page_range %}
+	    {% if page_obj.number == i %}
+	      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+	    {% else %}
+	      <li><a href="?page={{ i }}">{{ i }}</a></li>
+	    {% endif %}
+	  {% endfor %}
+	  {% if page_obj.has_next %}
+	    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+	  {% else %}
+	    <li class="disabled"><span>&raquo;</span></li>
+	  {% endif %}
+	</ul>
+</div>
 {% endif %}
-  <!-- Pager -->
-  <!-- <ul class="pager">
-      <li class="next">
-          <a href="#">Older Posts &rarr;</a>
-      </li>
-  </ul> -->
 {% endblock content %}

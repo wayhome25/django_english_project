@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
 from django.utils import timezone
+from django.views.generic import ListView
 import re
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, CreateUserForm
@@ -23,20 +24,10 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form' : form})
 
 
-def post_list(request):
-
-    p = Post.objects.filter(pk = 70)
-    posts = Post.objects.all()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(posts, 5)
-    try:
-        posts_page = paginator.page(page)
-    except PageNotAnInteger:
-        posts_page = paginator.page(1)
-    except EmptyPage:
-        posts_page = paginator.page(paginator.num_pages)
-
-    return render(request, 'bsr/post_list.html', {'posts':posts_page})
+class postLV(ListView):
+	model = Post
+	template_name = 'bsr/post_list.html'
+	paginate_by = 5
 
 
 def post_detail(request, pk):

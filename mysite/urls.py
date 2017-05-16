@@ -9,7 +9,7 @@ from study import views as study_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^', include('study.urls')),
+    url(r'^', include('study.urls', namespace='study')),
     url(r'^accounts/signup/$', study_views.signup, name='signup'),
 ]
 
