@@ -17,7 +17,7 @@
                 <a class="heading" href="/">
                   <h1>{{post.title}}</h1>
                 </a>
-                  <span class="meta">by <a href="#">{{post.author}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_date | date:"Y-m-d D" }}</span>
+                  <span class="meta">by <a href="#">{{post.author}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_at | date:"Y-m-d D" }}</span>
               </div>
             </div>
         </div>
@@ -26,7 +26,12 @@
 {% endblock %}
 
 {% block content %}
-  <p>
+
+	{% autoescape off %}
+	{{post.content|linebreaksbr }}
+	{% endautoescape %}
+
+  {# <p>
   {% if post.video_key %}
   <div id="player">
       <iframe class="iframe" src="https://www.youtube.com/embed/{{ post.video_key }}?start={{post.video_time}}" frameborder="0" allowfullscreen></iframe>
@@ -49,7 +54,7 @@
   {% if post.origin %}
   <p><a class="origin" href="{{post.origin}}">원본자료 출처</a></p>
   {% endif %}
-  </p>
+  </p>#}
 
 
   {% if post.author == user %}

@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^', include('study.urls', namespace='study')),
     url(r'^accounts/signup/$', study_views.signup, name='signup'),
+	url(r'^summernote/', include('django_summernote.urls')),
 ]
 
 if settings.DEBUG: # setting.py의 DEBUG = True인 경우
