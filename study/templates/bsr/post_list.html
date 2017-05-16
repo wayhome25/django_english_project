@@ -26,9 +26,9 @@
               {{ post.title }}
               <span class="count">[{{ post.comments.count }}]</span>
           </h2>
-          <h3 class="post-subtitle">
-              {{ post.text | truncatechars:200 | safe }}
-          </h3>
+          <!--<h3 class="post-subtitle">
+              {{ post.content |  truncatechars_html:100 | safe}}
+          </h3>-->
       </a>
       <p class="post-meta">by <a href="#">{{ post.author }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_at | date:"Y-m-d D" }}</p>
   </div>

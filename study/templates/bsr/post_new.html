@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST" class="login-form" enctype="multipart/form-data">
+<form method="POST" class="login-form col-md-12" enctype="multipart/form-data">
 {% csrf_token %}
 <input type="hidden" name="next" value="">
 {{ form.as_p }}

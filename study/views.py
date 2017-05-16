@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
 from django.utils import timezone
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView
 import re
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, CreateUserForm
