@@ -27,7 +27,7 @@ def signup(request):
 class postLV(ListView):
 	model = Post
 	template_name = 'bsr/post_list.html'
-	paginate_by = 5
+	paginate_by = 7
 
 
 def post_detail(request, pk):

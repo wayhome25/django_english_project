@@ -19,24 +19,34 @@
 {% endblock %}
 
 {% block content %}
-{% for post in object_list %}
-  <div class="post-preview">
-      <a href="{% url 'study:post_detail' pk=post.pk %}">
-          <h2 class="post-title">
-              {{ post.title }}
-              <span class="count">[{{ post.comments.count }}]</span>
-          </h2>
-          <!--<h3 class="post-subtitle">
-              {{ post.content |  truncatechars_html:100 | safe}}
-          </h3>-->
-      </a>
-      <p class="post-meta">by <a href="#">{{ post.author }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ post.created_at | date:"Y-m-d D" }}</p>
-  </div>
-  <hr>
-{% endfor %}
+
+<div id="board" class="container">
+	<div class="table-responsive text-center">
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for post in object_list %}
+				<tr>
+					<td>{{ post.id }}</td>
+					<td><a href="{% url 'study:post_detail' pk=post.pk %}">{{ post.title }} <span class="count">[{{ post.comments.count }}]</span></a></td>
+					<td>{{ post.author }}</td>
+					<td>{{ post.created_at | date:"Y-m-d D" }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
 
 {% if is_paginated %}
-<div class="text-center">
+<div class="text-center pagination-wrap">
 	<ul class="pagination">
 	  {% if page_obj.has_previous %}
 	    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
