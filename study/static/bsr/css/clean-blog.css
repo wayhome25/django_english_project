@@ -540,3 +540,8 @@ body {
   font-weight: bold;
 
 }
+
+#id_content_iframe {
+	height: 460px !important;
+	margin-bottom: 30px;
+}
