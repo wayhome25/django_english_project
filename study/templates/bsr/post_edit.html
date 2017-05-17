@@ -21,13 +21,15 @@
 
 
 {% block content %}
-<form method="POST" class="login-form" enctype="multipart/form-data">
-{% csrf_token %}
-<input type="hidden" name="next" value="">
-{{ form.as_p }}
-<input type="submit" class="save btn btn-success" value="수정">
-<a href="{% url 'study:post_list' %}">
-  <button type="button" class="btn btn-danger">취소</button>
-</a>
-</form>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	<form method="POST" class="login-form" enctype="multipart/form-data">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="">
+		{{ form.as_p }}
+		<input type="submit" class="save btn btn-success" value="수정">
+		<a href="{% url 'study:post_list' %}">
+		  <button type="button" class="btn btn-danger">취소</button>
+		</a>
+	</form>
+</div>
 {% endblock content %}
