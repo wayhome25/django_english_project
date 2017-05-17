@@ -22,7 +22,13 @@
 
 <div id="board" class="container">
 	<div class="table-responsive text-center">
-		<table class="table text-center">
+		<p>
+			<form action="" method="get" class="text-right search">
+				<input type="text" name="q" value="{{ q }}" placeholder="제목 검색" class="search-input">
+				<input type="submit" value="검색" class="btn btn-success search-btn">
+			</form>
+		</p>
+		<table class="table text-center table-hover">
 			<thead>
 				<tr>
 					<th>id</th>
@@ -46,6 +52,7 @@
 </div>
 
 {% if is_paginated %}
+
 <div class="text-center pagination-wrap">
 	<ul class="pagination">
 	  {% if page_obj.has_previous %}
@@ -67,5 +74,6 @@
 	  {% endif %}
 	</ul>
 </div>
+
 {% endif %}
 {% endblock content %}

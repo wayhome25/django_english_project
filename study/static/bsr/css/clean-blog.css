@@ -83,10 +83,37 @@ hr.small {
   text-align: center;
 }
 
+/*검색창*/
+form * {
+	vertical-align: middle;
+}
+
+.search {
+	text-align: right;
+	margin-bottom: 30px;
+}
+
+.search-btn {
+	height: 40px;
+	padding: 5px 25px !important;
+
+}
+
+.search-input{
+	
+	height: 40px;
+	text-align: center;
+}
+
+/*글목록 테이블*/
 .table {
   margin-bottom: 10px;
   width: 100%;
   max-width: 100%;
+}
+
+.table tr td:nth-child(2) {
+	width: 70%;
 }
 
 .table thead th {
@@ -106,7 +133,7 @@ hr.small {
 }
 
 .pagination-wrap {
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 @media only screen and (min-width: 768px) {

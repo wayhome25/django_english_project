@@ -1,10 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.generic import ListView
-import re
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, CreateUserForm
 
@@ -28,6 +27,15 @@ class postLV(ListView):
 	model = Post
 	template_name = 'bsr/post_list.html'
 	paginate_by = 7
+
+	def get_queryset(self):
+		qs = Post.objects.all()
+		q = self.request.GET.get('q', '') # GET request의 get 인자중에 q 가 있으면 가져오고, 없으면 빈 문자열
+
+		if q:
+			qs = qs.filter(title__icontains=q)
+
+		return qs
 
 
 def post_detail(request, pk):
